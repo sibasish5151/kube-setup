@@ -1,17 +1,10 @@
-#update package
-apt update -y
-
-#Set the appropriate hostname for each machine.
-sudo hostnamectl set-hostname ""
-exec bash
-
-#Install Docker
-apt install docker.io -y
+#update package & Install Docker
+apt update -y && apt install docker.io -y
 
 #Step 1. Install containerd 
 #Load the br_netfilter module required for networking.
-sudo modprobe overlay
-sudo modprobe br_netfilter
+sudo modprobe overlay && sudo modprobe br_netfilter
+
 cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
 overlay
 br_netfilter
@@ -41,5 +34,8 @@ sudo apt install -y containerd.io
 #Set up the default configuration file
 sudo mkdir -p /etc/containerd
 sudo containerd config default | sudo tee /etc/containerd/config.toml
+
+#S.
+echo "run the commands 'sudo hostnamectl set-hostname "node-name" ' and then 'exec bash' one after another to set the appropriate hostname for each machine"
 
 echo "Now run 'sudo vi /etc/containerd/config.toml' & change the SystemdCgroup to true "
