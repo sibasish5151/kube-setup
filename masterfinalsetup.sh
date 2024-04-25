@@ -14,3 +14,7 @@ echo "Copy the kubeadm join token and paste it in the worker nodes"
 
 #To display join token, using join token worker node will connects with master node
 kubeadm token create --print-join-command
+
+echo "Run 'cat /etc/kubernetes/admin.conf', copy the content and paste it in the opened vi editor of user-node" 
+
+echo "Run the commands like 'kubectl get nodes', 'kubectl get pods --all-namespaces' in the 'USER-NODE' only (Not in master-node) to keep the cluster secured"
